@@ -3,7 +3,12 @@ from flask import Flask, request, Response
 import os
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
-from viberbot.api.messages.text_messages import TextMessage 
+from viberbot.api.messages import (
+  TextMessage,
+  ContactMessage,
+  PictureMessage,
+  VideoMessage
+)
 from viberbot.api.viber_request import ViberMessageRequest, ViberSubscribedRequest
 
 #Start Flask
