@@ -26,7 +26,7 @@ bot_configuration = BotConfiguration(
 )
 
 viber = Api(bot_configuration)
-viber.set_webhook('https://selecta-b2b-viber.herokuapp.com/')
+#viber.set_webhook('https://selecta-b2b-viber.herokuapp.com/')
 print('started')
 
 @app.route('/', methods = ['POST'])
