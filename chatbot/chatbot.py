@@ -63,4 +63,4 @@ def incoming():
 
 context = ('server.crt', 'server.key')
 
-app.run(host = 'https://selecta-b2b-viber.herokuapp.com/', port = 443, debug = True, ssl_context = context)
+app.run(host = 'https://selecta-b2b-viber.herokuapp.com/', debug = True, ssl_context = context)
