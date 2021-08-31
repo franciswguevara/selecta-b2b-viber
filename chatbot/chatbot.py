@@ -24,6 +24,8 @@ viber = Api(BotConfiguration(
     auth_token= access_token
 ))
 
+viber.set_webhook('https://selecta-b2b-viber.herokuapp.com/')
+
 @app.route('/', methods=['POST'])
 def incoming():
   # this library supplies a simple way to receive a request object
@@ -42,4 +44,4 @@ def incoming():
   return Response(status=200)
 
 if __name__ == "__main__":
-  app.run(host='https://selecta-b2b-viber.herokuapp.com/', port=443, debug=True)
+  app.run(host='https://selecta-b2b-viber.herokuapp.com/', debug=True)
