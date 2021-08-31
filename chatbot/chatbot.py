@@ -36,7 +36,7 @@ def incoming():
     ])
   elif isinstance(viber_request, ViberSubscribedRequest):
     viber.send_messages(viber_request.get_user.id, [
-        TextMessage(text="Hvala što ste se prijavili na ovu uslugu!")
+        TextMessage(text="You're subscribed!")
     ])
 
   return Response(status=200)
