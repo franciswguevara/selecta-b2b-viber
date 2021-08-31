@@ -9,7 +9,7 @@ from viberbot.api.messages import (
   PictureMessage,
   VideoMessage
 )
-from viberbot.api.viber_request import ViberMessageRequest, ViberSubscribedRequest
+from viberbot.api.viber_requests import ViberMessageRequest, ViberSubscribedRequest
 
 #Start Flask
 app = Flask(__name__)
