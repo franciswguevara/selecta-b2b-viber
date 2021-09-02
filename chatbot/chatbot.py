@@ -40,17 +40,13 @@ def incoming():
   if isinstance(viber_request, ViberMessageRequest):
     message = viber_request.message
     
-    # if message.lower() == 'order':
-    #   viber.send_messages(viber_request.sender.id, [TextMessage(text='What do you want to order?')])
-    # elif message.lower() == '2 vanilla':
-
-    # lets echo back
-    print(type(message))
-    print(message)
-    print(help(message))
-    print(message.text)
-
-    viber.send_messages(viber_request.sender.id, [message])
+    if message.text.lower() == 'order':
+      viber.send_messages(viber_request.sender.id, [TextMessage(text='What do you want to order?')])
+    elif message.text.lower() == '2 vanilla':
+      viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/MFZcVom.jpg',text='Confirming your order of 2 Tubs of SELECTA IH CLSC VANILLA 1X1.5L')])
+      viber.send_messages(viber_request.sender.id, [TextMessage(text='Your order is on its way!')])
+    
+    #viber.send_messages(viber_request.sender.id, [message])
 
   elif isinstance(viber_request, ViberSubscribedRequest):
     viber.send_messages(viber_request.get_user.id, [
