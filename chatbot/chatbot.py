@@ -78,16 +78,16 @@ def incoming():
         "Type": "keyboard",
         "Buttons": [
           {
-          "Columns": 3,
-          "Rows": 1,
+          "Columns": 1,
+          "Rows": 3,
           "BgColor": "#e6f5ff",
           "BgMedia": "https://i.imgur.com/YxAFDbx.png",
           "BgMediaType": "picture",
           "BgLoop": True,
           "ActionType": "reply",
-          "ActionBody": "This will be sent to your bot in a callback",
+          "ActionBody": "2 Vanilla",
           "ReplyType": "message",
-          "Text": "2 Vanilla!"
+          "Text": "2 Vanilla"
           }
             ]
         }
