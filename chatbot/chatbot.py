@@ -107,8 +107,8 @@ def incoming():
           "Text": "2 Chocolate",
           "TextSize": "medium",
 		      "TextHAlign": "center"
-            ]
           }
+            ]
         }
 
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
