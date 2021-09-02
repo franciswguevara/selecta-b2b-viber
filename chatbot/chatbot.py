@@ -79,7 +79,7 @@ def incoming():
         "Buttons": [
           {
           "Columns": 1,
-          "Rows": 3,
+          "Rows": 2,
           "BgColor": "#e6f5ff",
           "BgMedia": "https://i.imgur.com/YxAFDbx.png",
           "BgMediaType": "picture",
