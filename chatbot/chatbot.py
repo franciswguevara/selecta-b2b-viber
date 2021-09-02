@@ -79,20 +79,23 @@ def incoming():
         "Buttons": [
           {
           "Columns": 3,
-          "Rows": 2,
+          "Rows": 1,
           "BgColor": "#e6f5ff",
-          "BgMedia": "http://link.to.button.image",
+          "BgMedia": "https://i.imgur.com/YxAFDbx.png",
           "BgMediaType": "picture",
           "BgLoop": True,
           "ActionType": "reply",
           "ActionBody": "This will be sent to your bot in a callback",
           "ReplyType": "message",
-          "Text": "Push me!"
+          "Text": "2 Vanilla!"
           }
             ]
         }
 
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
+      viber.send_messages(viber_request.sender.id, [message])
+    else:
+      #echo bot
       viber.send_messages(viber_request.sender.id, [message])
   elif isinstance(viber_request, ViberSubscribedRequest):
     viber.send_messages(viber_request.get_user.id, [
