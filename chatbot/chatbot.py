@@ -19,26 +19,29 @@ app = Flask(__name__)
 
 viber = Api(BotConfiguration(
     name='Selecta B2B',
-    avatar='',
+    avatar='https://i.imgur.com/YxAFDbx.png',
     auth_token = access_token
 ))
 
 #viber.set_webhook('https://selecta-b2b-viber.herokuapp.com/')
 print('webhook set','=============================')
 
-@app.route('/incoming', methods=['POST'])
+@app.route('/', methods=['POST'])
 def incoming():
   # this library supplies a simple way to receive a request object
-  viber_request = viber.parse_request(request.get_data())
+  try:
+    viber_request = viber.parse_request(request.get_data())
 
-  if isinstance(viber_request, ViberMessageRequest):
-    # lets echo back
-    viber.send_messages(viber_request.sender.id, [
-        TextMessage(text="Your id is: " + str(viber_request.sender.id))
-    ])
-  elif isinstance(viber_request, ViberSubscribedRequest):
-    viber.send_messages(viber_request.get_user.id, [
-        TextMessage(text="You're subscribed!")
-    ])
+    if isinstance(viber_request, ViberMessageRequest):
+      # lets echo back
+      viber.send_messages(viber_request.sender.id, [
+          TextMessage(text="Your id is: " + str(viber_request.sender.id))
+      ])
+    elif isinstance(viber_request, ViberSubscribedRequest):
+      viber.send_messages(viber_request.get_user.id, [
+          TextMessage(text="You're subscribed!")
+      ])
+    return Response(status=200)
+  except:
 
-  return Response(status=200)
+    return Response(status=200)
