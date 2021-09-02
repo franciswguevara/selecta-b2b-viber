@@ -4,12 +4,7 @@ import logging
 import os
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
-from viberbot.api.messages import (
-  TextMessage,
-  ContactMessage,
-  PictureMessage,
-  VideoMessage
-)
+from viberbot.api.messages import *
 from viberbot.api.viber_requests import (
   ViberConversationStartedRequest,
   ViberMessageRequest, 
@@ -44,10 +39,18 @@ def incoming():
 
   if isinstance(viber_request, ViberMessageRequest):
     message = viber_request.message
+    
+    # if message.lower() == 'order':
+    #   viber.send_messages(viber_request.sender.id, [TextMessage(text='What do you want to order?')])
+    # elif message.lower() == '2 vanilla':
+
     # lets echo back
-    viber.send_messages(viber_request.sender.id, [
-        message
-    ])
+    print(type(message))
+    print(message)
+    print(help(message))
+    
+    viber.send_messages(viber_request.sender.id, [message])
+
   elif isinstance(viber_request, ViberSubscribedRequest):
     viber.send_messages(viber_request.get_user.id, [
         TextMessage(text="thanks for subscribing!")
