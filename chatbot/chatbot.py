@@ -42,10 +42,10 @@ def incoming():
     
     if message.text.lower() == 'order':
       viber.send_messages(viber_request.sender.id, [TextMessage(text='What do you want to order?')])
-    elif message.text.lower() == 'Vanilla':
+    elif message.text.lower() == 'vanilla':
       viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/MFZcVom.jpg',text='Confirming your order of 1 Tub of SELECTA IH CLSC VANILLA 1X1.5L')])
       viber.send_messages(viber_request.sender.id, [TextMessage(text='Your total is PHP 100.00 and your order is on its way!')])
-    elif message.text.lower() == 'Chocolate':
+    elif message.text.lower() == 'chocolate':
       viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/c7MZgVK.jpg',text='Confirming your order of 1 Tub of SELECTA IH CLSC SUPER CHOCOLATE 1X1.5L')])
       viber.send_messages(viber_request.sender.id, [TextMessage(text='Your total is PHP 100.00 and your order is on its way!')])
     elif message.text.lower() == 'rich':
@@ -88,9 +88,9 @@ def incoming():
           "BgMediaType": "picture",
           "BgLoop": True,
           "ActionType": "reply",
-          "ActionBody": "2 Vanilla",
+          "ActionBody": "Vanilla",
           "ReplyType": "message",
-          "Text": "2 Vanilla",
+          "Text": "Vanilla",
           "TextSize": "medium",
 		      "TextHAlign": "center"
           },
@@ -102,9 +102,9 @@ def incoming():
           "BgMediaType": "picture",
           "BgLoop": True,
           "ActionType": "reply",
-          "ActionBody": "2 Chocolate",
+          "ActionBody": "Chocolate",
           "ReplyType": "message",
-          "Text": "2 Chocolate",
+          "Text": "Chocolate",
           "TextSize": "medium",
 		      "TextHAlign": "center"
           }
