@@ -33,7 +33,7 @@ viber = Api(BotConfiguration(
 @app.route('/', methods=['POST'])
 def incoming():
   
-  logger.debug("received request. post data: {0}".format(request.get_data()))
+  #logger.debug("received request. post data: {0}".format(request.get_data()))
   
   # every viber message is signed, you can verify the signature using this method
   if not viber.verify_signature(request.get_data(), request.headers.get('X-Viber-Content-Signature')):
@@ -53,6 +53,7 @@ def incoming():
         TextMessage(text="thanks for subscribing!")
     ])
   elif isinstance(viber_request, ViberFailedRequest):
-    logger.warn("client failed receiving message. failure: {0}".format(viber_request))
+    #logger.warn("client failed receiving message. failure: {0}".format(viber_request))
+    pass
 
   return Response(status=200)
