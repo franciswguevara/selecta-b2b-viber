@@ -45,9 +45,55 @@ def incoming():
     elif message.text.lower() == '2 vanilla':
       viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/MFZcVom.jpg',text='Confirming your order of 2 Tubs of SELECTA IH CLSC VANILLA 1X1.5L')])
       viber.send_messages(viber_request.sender.id, [TextMessage(text='Your order is on its way!')])
-    
-    #viber.send_messages(viber_request.sender.id, [message])
+    elif message.text.lower() == 'rich':
+      SAMPLE_RICH_MEDIA = {
+        "BgColor": "#69C48A",
+        "Buttons": [
+          {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#454545",
+            "BgMediaType": "jpg",
+            "BgMedia": "https://i.imgur.com/YxAFDbx.png",
+            "BgLoop": "true",
+            "ActionType": "open-url",
+            "Silent": "true",
+            "ActionBody": "www.i.imgur.com",
+            "Image": "https://i.imgur.com/YxAFDbx.png",
+            "TextVAlign": "middle",
+            "TextHAlign": "left",
+            "Text": "<b>example</b> button",
+            "TextOpacity": 10,
+            "TextSize": "regular"
+          }
+        ]
+      }
 
+      SAMPLE_ALT_TEXT = "Buy now!"
+
+      message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT)
+      viber.send_messages(viber_request.sender.id, [message])
+    elif message.text.lower() == 'keyboard':
+      SAMPLE_KEYBOARD = {
+        "Type": "keyboard",
+        "Buttons": [
+          {
+          "Columns": 3,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgMedia": "http://link.to.button.image",
+          "BgMediaType": "picture",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "This will be sent to your bot in a callback",
+          "ReplyType": "message",
+          "Text": "Push me!"
+          }
+            ]
+        }
+
+      message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
+      viber.send_messages(viber_request.sender.id, [message])
   elif isinstance(viber_request, ViberSubscribedRequest):
     viber.send_messages(viber_request.get_user.id, [
         TextMessage(text="thanks for subscribing!")
