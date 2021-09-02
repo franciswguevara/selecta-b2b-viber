@@ -1,5 +1,6 @@
 from flask import Flask, request, Response
 from dotenv import load_dotenv
+import logging
 import os
 from viberbot import Api
 from viberbot.api.bot_configuration import BotConfiguration
@@ -9,7 +10,13 @@ from viberbot.api.messages import (
   PictureMessage,
   VideoMessage
 )
-from viberbot.api.viber_requests import ViberMessageRequest, ViberSubscribedRequest
+from viberbot.api.viber_requests import (
+  ViberConversationStartedRequest,
+  ViberMessageRequest, 
+  ViberSubscribedRequest,
+  ViberFailedRequest,
+  ViberUnsubscribedRequest
+)
 
 load_dotenv()
 access_token = os.getenv("CHATBOT_TOKEN")
