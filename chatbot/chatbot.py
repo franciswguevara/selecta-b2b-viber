@@ -24,7 +24,6 @@ viber = Api(BotConfiguration(
 ))
 
 #viber.set_webhook('https://selecta-b2b-viber.herokuapp.com/')
-print('webhook set','=============================')
 
 @app.route('/', methods=['POST'])
 def incoming():
@@ -42,6 +41,6 @@ def incoming():
           TextMessage(text="You're subscribed!")
       ])
     return Response(status=200)
-  except:
-
+  except Exception as e:
+    print("THERE WAS AN ERROR NOOOO:",e)
     return Response(status=200)
