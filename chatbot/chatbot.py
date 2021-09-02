@@ -42,9 +42,12 @@ def incoming():
     
     if message.text.lower() == 'order':
       viber.send_messages(viber_request.sender.id, [TextMessage(text='What do you want to order?')])
-    elif message.text.lower() == '2 vanilla':
-      viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/MFZcVom.jpg',text='Confirming your order of 2 Tubs of SELECTA IH CLSC VANILLA 1X1.5L')])
-      viber.send_messages(viber_request.sender.id, [TextMessage(text='Your order is on its way!')])
+    elif message.text.lower() == 'Vanilla':
+      viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/MFZcVom.jpg',text='Confirming your order of 1 Tub of SELECTA IH CLSC VANILLA 1X1.5L')])
+      viber.send_messages(viber_request.sender.id, [TextMessage(text='Your total is PHP 100.00 and your order is on its way!')])
+    elif message.text.lower() == 'Chocolate':
+      viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/c7MZgVK.jpg',text='Confirming your order of 1 Tub of SELECTA IH CLSC SUPER CHOCOLATE 1X1.5L')])
+      viber.send_messages(viber_request.sender.id, [TextMessage(text='Your total is PHP 100.00 and your order is on its way!')])
     elif message.text.lower() == 'rich':
       SAMPLE_RICH_MEDIA = {
         "BgColor": "#69C48A",
@@ -78,17 +81,32 @@ def incoming():
         "Type": "keyboard",
         "Buttons": [
           {
-          "Columns": 1,
+          "Columns": 3,
           "Rows": 2,
           "BgColor": "#e6f5ff",
-          "BgMedia": "https://i.imgur.com/YxAFDbx.png",
+          "BgMedia": "https://i.imgur.com/MFZcVom.jpg",
           "BgMediaType": "picture",
           "BgLoop": True,
           "ActionType": "reply",
           "ActionBody": "2 Vanilla",
           "ReplyType": "message",
-          "Text": "2 Vanilla"
-          }
+          "Text": "2 Vanilla",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 3,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgMedia": "https://i.imgur.com/c7MZgVK.jpg",
+          "BgMediaType": "picture",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "2 Chocolate",
+          "ReplyType": "message",
+          "Text": "2 Chocolate",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
             ]
         }
 
