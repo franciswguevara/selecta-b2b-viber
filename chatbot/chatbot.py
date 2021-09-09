@@ -22,8 +22,7 @@ app = Flask(__name__)
 viber = Api(BotConfiguration(
     name='Selecta B2B',
     avatar='https://i.imgur.com/YxAFDbx.png',
-    auth_token = access_token,
-    min_api_version = 7
+    auth_token = access_token
 ))
 
 @app.route('/', methods=['POST'])
