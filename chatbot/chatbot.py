@@ -56,12 +56,12 @@ def incoming():
             "Columns": 6,
             "Rows": 1,
             "BgColor": "#454545",
-            "BgMediaType": "jpg",
-            "BgMedia": "https://i.imgur.com/YxAFDbx.png",
-            "BgLoop": "true",
+            # "BgMediaType": "jpg",
+            # "BgMedia": "https://i.imgur.com/YxAFDbx.png",
+            # "BgLoop": "true",
             "ActionType": "open-url",
             "Silent": "true",
-            "ActionBody": "www.i.imgur.com",
+            "ActionBody": "https://www.google.com",
             "Image": "https://i.imgur.com/YxAFDbx.png",
             "TextVAlign": "middle",
             "TextHAlign": "left",
@@ -124,4 +124,24 @@ def incoming():
     #logger.warn("client failed receiving message. failure: {0}".format(viber_request))
     pass
 
+  return Response(status=200)
+
+@app.route('/instantiate', methods=['POST'])
+def start():
+  pass
+  return Response(status=200)
+
+@app.route('/login', methods=['POST'])
+def login():
+  pass
+  return Response(status=200)
+
+@app.route('/order', methods=['POST'])
+def order():
+  pass
+  return Response(status=200)
+
+@app.route('/checkout', methods=['POST'])
+def checkout():
+  pass
   return Response(status=200)
