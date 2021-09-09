@@ -57,7 +57,7 @@ def incoming():
             "Columns": 6,
             "Rows": 1,
             "BgColor": "#454545",
-            "BgMediaType": "jpg",
+            "BgMediaType": "picture",
             "BgMedia": "https://i.imgur.com/YxAFDbx.png",
             "BgLoop": "true",
             "ActionType": "open-url",
