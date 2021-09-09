@@ -22,7 +22,8 @@ app = Flask(__name__)
 viber = Api(BotConfiguration(
     name='Selecta B2B',
     avatar='https://i.imgur.com/YxAFDbx.png',
-    auth_token = access_token
+    auth_token = access_token,
+    min_api_version = 7
 ))
 
 @app.route('/', methods=['POST'])
@@ -56,9 +57,9 @@ def incoming():
             "Columns": 6,
             "Rows": 1,
             "BgColor": "#454545",
-            # "BgMediaType": "jpg",
-            # "BgMedia": "https://i.imgur.com/YxAFDbx.png",
-            # "BgLoop": "true",
+            "BgMediaType": "jpg",
+            "BgMedia": "https://i.imgur.com/YxAFDbx.png",
+            "BgLoop": "true",
             "ActionType": "open-url",
             "Silent": "true",
             "ActionBody": "https://www.google.com",
