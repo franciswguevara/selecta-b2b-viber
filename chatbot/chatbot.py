@@ -2,10 +2,10 @@ from flask import Flask, request, Response
 from dotenv import load_dotenv
 import logging
 import os
-from viberbot import Api
-from viberbot.api.bot_configuration import BotConfiguration
-from viberbot.api.messages import *
-from viberbot.api.viber_requests import (
+from .viberbot import Api
+from .viberbot.api.bot_configuration import BotConfiguration
+from .viberbot.api.messages import *
+from .viberbot.api.viber_requests import (
   ViberConversationStartedRequest,
   ViberMessageRequest, 
   ViberSubscribedRequest,
