@@ -55,7 +55,7 @@ def incoming():
         "Buttons": [
           {
             "Columns": 6,
-            "Rows": 1,
+            "Rows": 7,
             "BgColor": "#454545",
             "BgMediaType": "picture",
             "BgMedia": "https://i.imgur.com/YxAFDbx.png",
