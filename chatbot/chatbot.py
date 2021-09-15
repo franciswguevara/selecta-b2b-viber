@@ -4,6 +4,7 @@ import logging
 import os
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot import Api
+from viberbot.api.message_sender import MessageSender
 from viberbot.api.messages import *
 from viberbot.api.viber_requests import (
   ViberConversationStartedRequest,
