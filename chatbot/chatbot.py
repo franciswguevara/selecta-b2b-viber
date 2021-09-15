@@ -51,7 +51,7 @@ class New_MessageSender(MessageSender):
 class New_Api(Api):
   def __init__(self, *args, **kwargs):
     super(New_Api, self).__init__(*args, **kwargs)
-    self._message_sender = New_MessageSender(self._logger, self._request_sender, bot_configuration)
+    self._message_sender = New_MessageSender(self._logger, self._request_sender, self._bot_configuration)
 
 viber = New_Api(New_BotConfiguration(
     name='Selecta B2B',
