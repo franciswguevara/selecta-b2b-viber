@@ -21,8 +21,8 @@ app = Flask(__name__)
 
 class New_BotConfiguration(BotConfiguration):
   def __init__(self, min_api_version=7, *args, **kwargs):
-      super(New_BotConfiguration, self).__init__(*args, **kwargs)
-      self.min_api_version= min_api_version
+    super(New_BotConfiguration, self).__init__(*args, **kwargs)
+    self.min_api_version= min_api_version
   
   @property
   def min_api_version(self):
@@ -30,11 +30,11 @@ class New_BotConfiguration(BotConfiguration):
 
 class MessageSender(Api.MessageSender):
   def __init__(self, min_api_version=7, *args, **kwargs):
-      super(MessageSender, self).__init__(*args, **kwargs)
-      self.min_api_version= min_api_version
+    super(MessageSender, self).__init__(*args, **kwargs)
+    self.min_api_version= min_api_version
 
   def _prepare_payload(self, message, sender_name, sender_avatar, sender=None, receiver=None, chat_id=None):
-		payload = message.to_dict()
+    payload = message.to_dict()
 		payload.update({
 			'auth_token': self._bot_configuration.auth_token,
 			'from': sender,
