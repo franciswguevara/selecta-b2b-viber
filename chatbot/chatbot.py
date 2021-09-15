@@ -34,8 +34,6 @@ class MessageSender(MessageSender):
     super(MessageSender, self).__init__(*args, **kwargs)
     self.min_api_version= min_api_version
 
-# class New_Api
-
   def _prepare_payload(self, message, sender_name, sender_avatar, sender=None, receiver=None, chat_id=None):
     payload = message.to_dict()
     payload.update(
