@@ -2,8 +2,8 @@ from flask import Flask, request, Response
 from dotenv import load_dotenv
 import logging
 import os
-from .viberbot.api.bot_configuration import BotConfiguration
-from .viberbot import Api
+from viberbot.api.bot_configuration import BotConfiguration
+from viberbot import Api
 from viberbot.api.messages import *
 from viberbot.api.viber_requests import (
   ViberConversationStartedRequest,
@@ -19,7 +19,38 @@ access_token = os.getenv("CHATBOT_TOKEN")
 #Start Flask
 app = Flask(__name__)
 
-viber = Api(BotConfiguration(
+class New_BotConfiguration(BotConfiguration):
+  def __init__(self, min_api_version=7, *args, **kwargs):
+      super(New_BotConfiguration, self).__init__(*args, **kwargs)
+      self.min_api_version= min_api_version
+  
+  @property
+  def min_api_version(self):
+    return self._min_api_version
+
+class MessageSender(Api.MessageSender):
+  def __init__(self, min_api_version=7, *args, **kwargs):
+      super(MessageSender, self).__init__(*args, **kwargs)
+      self.min_api_version= min_api_version
+
+  def _prepare_payload(self, message, sender_name, sender_avatar, sender=None, receiver=None, chat_id=None):
+		payload = message.to_dict()
+		payload.update({
+			'auth_token': self._bot_configuration.auth_token,
+			'from': sender,
+			'receiver': receiver,
+			'sender': {
+				'name': sender_name,
+				'avatar': sender_avatar
+			},
+			"chat_id": chat_id,
+			"min_api_version": self._bot_configuration.min_api_version
+		})
+
+		return self._remove_empty_fields(payload)
+
+
+viber = Api(New_BotConfiguration(
     name='Selecta B2B',
     avatar='https://i.imgur.com/YxAFDbx.png',
     auth_token = access_token,
