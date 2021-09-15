@@ -21,18 +21,20 @@ access_token = os.getenv("CHATBOT_TOKEN")
 app = Flask(__name__)
 
 class New_BotConfiguration(BotConfiguration):
-  def __init__(self, min_api_version=7, *args, **kwargs):
+  def __init__(self, *args, **kwargs):
     super(New_BotConfiguration, self).__init__(*args, **kwargs)
-    self.min_api_version= min_api_version
+    self.min_api_version= 7
   
   @property
   def min_api_version(self):
     return self._min_api_version
 
-class MessageSender(MessageSender):
-  def __init__(self, min_api_version=7, *args, **kwargs):
-    super(MessageSender, self).__init__(*args, **kwargs)
-    self.min_api_version= min_api_version
+# class New_MessageSender(MessageSender):
+#   def __init__(self, min_api_version=7, *args, **kwargs):
+#     super(New_MessageSender, self).__init__(*args, **kwargs)
+#     self.min_api_version= min_api_version
+
+# class New_Api
 
   def _prepare_payload(self, message, sender_name, sender_avatar, sender=None, receiver=None, chat_id=None):
     payload = message.to_dict()
@@ -53,8 +55,7 @@ class MessageSender(MessageSender):
 viber = Api(New_BotConfiguration(
     name='Selecta B2B',
     avatar='https://i.imgur.com/YxAFDbx.png',
-    auth_token = access_token,
-    min_api_version = 7
+    auth_token = access_token
 ))
 
 @app.route('/', methods=['POST'])
