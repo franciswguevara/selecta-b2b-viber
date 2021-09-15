@@ -53,7 +53,7 @@ class New_Api(Api):
     super(New_Api, self).__init__(*args, **kwargs)
     self._message_sender = New_MessageSender(self._logger, self._request_sender, bot_configuration)
 
-viber = Api(New_BotConfiguration(
+viber = New_Api(New_BotConfiguration(
     name='Selecta B2B',
     avatar='https://i.imgur.com/YxAFDbx.png',
     auth_token = access_token
