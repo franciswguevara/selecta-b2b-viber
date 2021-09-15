@@ -21,9 +21,9 @@ access_token = os.getenv("CHATBOT_TOKEN")
 app = Flask(__name__)
 
 class New_BotConfiguration(BotConfiguration):
-  def __init__(self, *args, **kwargs):
+  def __init__(self, min_api_version=7,*args, **kwargs):
     super(New_BotConfiguration, self).__init__(*args, **kwargs)
-    self.min_api_version= 7
+    self._min_api_version=min_api_version
   
   @property
   def min_api_version(self):
