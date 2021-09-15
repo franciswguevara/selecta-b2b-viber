@@ -29,10 +29,9 @@ class New_BotConfiguration(BotConfiguration):
   def min_api_version(self):
     return self._min_api_version
 
-class MessageSender(MessageSender):
-  def __init__(self, min_api_version=7, *args, **kwargs):
-    super(MessageSender, self).__init__(*args, **kwargs)
-    self.min_api_version= min_api_version
+class New_MessageSender(MessageSender):
+  def __init__(self, *args, **kwargs):
+    super(New_MessageSender, self).__init__(*args, **kwargs)
 
   def _prepare_payload(self, message, sender_name, sender_avatar, sender=None, receiver=None, chat_id=None):
     payload = message.to_dict()
@@ -49,6 +48,10 @@ class MessageSender(MessageSender):
       })
     return self._remove_empty_fields(payload)
 
+class New_Api(Api):
+  def __init__(self, *args, **kwargs):
+    super(New_Api, self).__init__(*args, **kwargs)
+    self._message_sender = New_MessageSender(self._logger, self._request_sender, bot_configuration)
 
 viber = Api(New_BotConfiguration(
     name='Selecta B2B',
