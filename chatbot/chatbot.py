@@ -29,10 +29,10 @@ class New_BotConfiguration(BotConfiguration):
   def min_api_version(self):
     return self._min_api_version
 
-# class New_MessageSender(MessageSender):
-#   def __init__(self, min_api_version=7, *args, **kwargs):
-#     super(New_MessageSender, self).__init__(*args, **kwargs)
-#     self.min_api_version= min_api_version
+class MessageSender(MessageSender):
+  def __init__(self, min_api_version=7, *args, **kwargs):
+    super(MessageSender, self).__init__(*args, **kwargs)
+    self.min_api_version= min_api_version
 
 # class New_Api
 
