@@ -36,16 +36,16 @@ class MessageSender(Api.MessageSender):
   def _prepare_payload(self, message, sender_name, sender_avatar, sender=None, receiver=None, chat_id=None):
     payload = message.to_dict()
 		payload.update({
-			'auth_token': self._bot_configuration.auth_token,
-			'from': sender,
+      'auth_token': self._bot_configuration.auth_token,
+      'from': sender,
 			'receiver': receiver,
 			'sender': {
-				'name': sender_name,
-				'avatar': sender_avatar
-			},
-			"chat_id": chat_id,
-			"min_api_version": self._bot_configuration.min_api_version
-		})
+        'name': sender_name,
+        'avatar': sender_avatar
+      },
+      "chat_id": chat_id,
+      "min_api_version": self._bot_configuration.min_api_version
+      })
 
 		return self._remove_empty_fields(payload)
 
