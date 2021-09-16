@@ -168,6 +168,80 @@ def incoming():
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       viber.send_messages(viber_request.sender.id, [TextMessage(text='Mag-login sa Tindahan Club? By clicking "AGREE" below, you are agreeing to the T&Cs of Tindahan Club.'),message])
     elif message.text.lower() == 'agree':
+      viber.send_messages(viber_request.sender.id, [
+          TextMessage(text='Do you want to quick order or browse?')
+          ])
+      KEYBOARD = {
+        "Type": "keyboard",
+        "Buttons": [
+          {
+          "Columns": 3,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "QUICK ORDER",
+          "ReplyType": "message",
+          "Text": "QUICK ORDER",
+          "TextSize": "large",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 3,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "BROWSE",
+          "ReplyType": "message",
+          "Text": "BROWSE",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          }
+            ]
+        }
+      message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
+      viber.send_messages(viber_request.sender.id, [message])
+    elif message.text.lower() == 'quick order' or 'back':
+      viber.send_messages(viber_request.sender.id, [TextMessage(text='Please enter your order using the following format:\nQuantity[Space]SKU Name on Official Pricelist'), 
+                                                    TextMessage(text='To enter multiple orders, please use another line'),
+                                                    TextMessage(text='Example Order:'),
+                                                    TextMessage(text="5 SELECTA IH DOUBLE DUTCH 1X1.4L\n3 MAGNUM CLASSIC AMBER 24X90ML\n2 GROM GELATO CIOCCOLATO 1X460ML\n1 SELECTA IH CLSC VANILLA 1X1.4L")])
+    elif message.text.upper() =='5 SELECTA IH DOUBLE DUTCH 1X1.4L\n3 MAGNUM CLASSIC AMBER 24X90ML\n2 GROM GELATO CIOCCOLATO 1X460ML\n1 SELECTA IH CLSC VANILLA 1X1.4L':
+      KEYBOARD = {
+        "Type": "keyboard",
+        "Buttons": [
+          {
+          "Columns": 3,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "CONFIRM",
+          "ReplyType": "message",
+          "Text": "CONFIRM",
+          "TextSize": "large",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 3,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "BACK",
+          "ReplyType": "message",
+          "Text": "BACK",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          }
+            ]
+        }
+      message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
+      viber.send_messages(viber_request.sender.id, [TextMessage(text="Confirming your order of:\n\n5 SELECTA IH DOUBLE DUTCH 1X1.4L\n3 MAGNUM CLASSIC AMBER 24X90ML\n2 GROM GELATO CIOCCOLATO 1X460ML\n1 SELECTA IH CLSC VANILLA 1X1.4L"),
+                                                    TextMessage(text='Is this correct?'),
+                                                    message])
+    elif message.text.lower() == 'browse':
       SAMPLE_RICH_MEDIA = {
         "BgColor": "#69C48A",
         "Buttons": [
@@ -316,7 +390,7 @@ def incoming():
       viber.send_messages(viber_request.sender.id, [message])
     else:
       #echo bot
-      print(message.text.split('\n'),'--------------------')
+      print(message.text.split('\n'))
       viber.send_messages(viber_request.sender.id, [message])
   elif isinstance(viber_request, ViberSubscribedRequest):
     viber.send_messages(viber_request.get_user.id, [
