@@ -1,4 +1,5 @@
 from flask import Flask, request, Response
+from datetime import date
 from dotenv import load_dotenv
 import logging
 import os
@@ -355,6 +356,41 @@ def incoming():
 
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       viber.send_messages(viber_request.sender.id, [message])
+    elif message.text.lower() == 'confirm':
+      KEYBOARD = {
+        "Type": "keyboard",
+        "Buttons": [
+          {
+          "Columns": 3,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "CONFIRM_2",
+          "ReplyType": "message",
+          "Text": "CONFIRM",
+          "TextSize": "large",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 3,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "BACK",
+          "ReplyType": "message",
+          "Text": "BACK",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          }
+            ]
+        }
+      key = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
+      delivery = f'{datetime.datetime.now().month}/{datetime.datetime.now().day+1}/{datetime.datetime.now().year}'
+      viber.send_messages(viber_request.sender.id, [TextMessage(text=f'Your order will be delivered on {delivery}')
+                                                    TextMessage(text='Do you confirm this delivery?')  ,
+                                                    key])
     elif order := parse_order(message.text.upper()):
       KEYBOARD = {
         "Type": "keyboard",

@@ -11,6 +11,6 @@ def parse_order(order):
                 total += (int(item[0]) * float(prices[skus.index(item[1])]))
             else:
                 return None
-        return [order,total]
+        return [order,round(total,2)]
     except:
         return None
