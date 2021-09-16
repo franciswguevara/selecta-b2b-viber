@@ -1,9 +1,11 @@
 from flask import Flask, request, Response
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
+from flask_session import Session
 
 db = SQLAlchemy()
 login_manager = LoginManager()
+sess = Session()
 
 def create_app():
     '''Construct the core app object'''
@@ -15,15 +17,16 @@ def create_app():
     # Initialize Plugins
     db.init_app(app)
     login_manager.init_app(app)
+    sess.init_app(app)
 
     with app.app_context():
         from . import routes
         from . import auth
+        from .code import *
         #from .assets import compile_assets
-        from viberbot import Api
-        from viberbot.api.bot_configuration import BotConfiguration
-
-        viber = Api(BotConfiguration(
+        
+        # Create Viberbot
+        viber = New_Api(New_BotConfiguration(
             name='Selecta B2B',
             avatar='https://i.imgur.com/YxAFDbx.png',
             auth_token = access_token
@@ -35,10 +38,7 @@ def create_app():
 
         # Create Database Models
         db.create_all()
-
-        # Compile static assets
-        # if app.config['FLASK_ENV'] == 'development':
-        #     compile_assets(app)
+        
         return app
 
 

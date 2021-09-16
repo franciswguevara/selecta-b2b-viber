@@ -56,7 +56,8 @@ class New_Api(Api):
 viber = New_Api(New_BotConfiguration(
     name='Selecta B2B',
     avatar='https://i.imgur.com/YxAFDbx.png',
-    auth_token = access_token
+    auth_token = access_token,
+    min_api_version = 7.6
 ))
 
 @app.route('/', methods=['POST'])
