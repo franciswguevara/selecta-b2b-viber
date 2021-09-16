@@ -72,10 +72,14 @@ def incoming():
 
   # this library supplies a simple way to receive a request object
   viber_request = viber.parse_request(request.get_data())
-  name = viber_request.sender.name
+  
 
   if isinstance(viber_request, ViberMessageRequest):
     message = viber_request.message
+    try:
+      name = viber_request.sender.name
+    except:
+      pass
     
     if message.text.lower() == 'order':
       viber.send_messages(viber_request.sender.id, [
