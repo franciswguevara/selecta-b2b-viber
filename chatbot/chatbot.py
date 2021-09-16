@@ -168,7 +168,33 @@ def incoming():
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       viber.send_messages(viber_request.sender.id, [TextMessage(text='Mag-login sa Tindahan Club? By clicking "AGREE" below, you are agreeing to the T&Cs of Tindahan Club.'),message])
     elif message.text.lower() == 'agree':
-      viber.send_messages(viber_request.sender.id, [TextMessage(text=f'Welcome {name}!'),TextMessage(text='Welcome Pumili mula sa mga product categories!')])
+      SAMPLE_RICH_MEDIA = {
+        "BgColor": "#69C48A",
+        "Buttons": [
+          {
+            "Columns": 6,
+            "Rows": 7,
+            "BgColor": "#454545",
+            "BgMediaType": "picture",
+            "BgMedia": "https://i.imgur.com/YxAFDbx.png",
+            "BgLoop": "true",
+            "ActionType": "open-url",
+            "Silent": "true",
+            "ActionBody": "https://www.google.com",
+            "Image": "https://i.imgur.com/YxAFDbx.png",
+            "TextVAlign": "middle",
+            "TextHAlign": "left",
+            "Text": "<b>example</b> button",
+            "TextOpacity": 10,
+            "TextSize": "regular"
+          }
+        ]
+      }
+
+      SAMPLE_ALT_TEXT = "Buy now!"
+
+      message = RichMediaMessage(rich_media=SAMPLE_RICH_MEDIA, alt_text=SAMPLE_ALT_TEXT)
+      viber.send_messages(viber_request.sender.id, [TextMessage(text=f'Welcome {name}!'),TextMessage(text='Pumili mula sa mga product categories!'),message])
     elif message.text.lower() == 'vanilla':
       viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/MFZcVom.jpg',text='Confirming your order of 1 Tub of SELECTA IH CLSC VANILLA 1X1.5L')])
       viber.send_messages(viber_request.sender.id, [TextMessage(text='Your total is PHP 100.00 and your order is on its way!')])
@@ -291,7 +317,7 @@ def incoming():
     else:
       #echo bot
       viber.send_messages(viber_request.sender.id, [message])
-      print(message.split('\n'))
+      print(message.text.split('\n'))
   elif isinstance(viber_request, ViberSubscribedRequest):
     viber.send_messages(viber_request.get_user.id, [
         TextMessage(text="thanks for subscribing!")
