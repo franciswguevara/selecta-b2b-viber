@@ -202,7 +202,7 @@ def incoming():
         }
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       viber.send_messages(viber_request.sender.id, [message])
-    elif message.text.lower() == 'quick order' or 'back':
+    elif message.text.lower() == 'quick order' or message.text.lower() == 'back':
       viber.send_messages(viber_request.sender.id, [TextMessage(text='Please enter your order using the following format:\nQuantity[Space]SKU Name on Official Pricelist'), 
                                                     TextMessage(text='To enter multiple orders, please use another line'),
                                                     TextMessage(text='Example Order:'),
