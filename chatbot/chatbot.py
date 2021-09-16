@@ -316,8 +316,8 @@ def incoming():
       viber.send_messages(viber_request.sender.id, [message])
     else:
       #echo bot
-      viber.send_messages(viber_request.sender.id, [message])
       print(message.text.split('\n'),'--------------------')
+      viber.send_messages(viber_request.sender.id, [message])
   elif isinstance(viber_request, ViberSubscribedRequest):
     viber.send_messages(viber_request.get_user.id, [
         TextMessage(text="thanks for subscribing!")
