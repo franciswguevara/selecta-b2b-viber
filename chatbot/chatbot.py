@@ -1,5 +1,5 @@
 from flask import Flask, request, Response
-from datetime import date
+from datetime
 from dotenv import load_dotenv
 import logging
 import os
