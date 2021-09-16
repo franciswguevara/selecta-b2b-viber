@@ -388,8 +388,8 @@ def incoming():
         }
       key = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       delivery = f'{datetime.datetime.now().month}/{datetime.datetime.now().day+1}/{datetime.datetime.now().year}'
-      viber.send_messages(viber_request.sender.id, [TextMessage(text=f'Your order will be delivered on {delivery}')
-                                                    TextMessage(text='Do you confirm this delivery?')  ,
+      viber.send_messages(viber_request.sender.id, [TextMessage(text=f'Your order will be delivered on {delivery}'),
+                                                    TextMessage(text='Do you confirm this delivery?'),
                                                     key])
     elif message.text.lower() == 'confirm_2':
       viber.send_messages(viber_request.sender.id, [TextMessage(text=f"Your delivery is on it's way. Thank you for using the Tindahan Club!")])
