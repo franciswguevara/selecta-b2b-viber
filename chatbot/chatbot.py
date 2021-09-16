@@ -211,42 +211,6 @@ def incoming():
                                                     TextMessage(text='To enter multiple orders, please use another line'),
                                                     TextMessage(text='Example Order:'),
                                                     TextMessage(text="5 SELECTA IH SUP DOUBLE DUTCH 1X1.3L\n3 MAGNUM CLASSIC AMBER 24X90ML\n2 GROM GELATO CIOCCOLATO 1X460ML\n1 SELECTA IH CLSC VANILLA 1X3.0L")])
-    elif order := parse_order(message.text.upper()):
-      KEYBOARD = {
-        "Type": "keyboard",
-        "Buttons": [
-          {
-          "Columns": 3,
-          "Rows": 2,
-          "BgColor": "#e6f5ff",
-          "BgLoop": True,
-          "ActionType": "reply",
-          "ActionBody": "CONFIRM",
-          "ReplyType": "message",
-          "Text": "CONFIRM",
-          "TextSize": "large",
-		      "TextHAlign": "center"
-          },
-          {
-          "Columns": 3,
-          "Rows": 2,
-          "BgColor": "#e6f5ff",
-          "BgLoop": True,
-          "ActionType": "reply",
-          "ActionBody": "BACK",
-          "ReplyType": "message",
-          "Text": "BACK",
-          "TextSize": "medium",
-		      "TextHAlign": "center"
-          }
-            ]
-        }
-      key = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
-      viber.send_messages(viber_request.sender.id, [TextMessage(text=f'Confirming your order of:'),
-                                                    TextMessage(text=order[0]),
-                                                    TextMessage(text=f'Your total will be {order[1]}'),
-                                                    TextMessage(text='Is this correct?'),
-                                                    message])
     elif message.text.lower() == 'browse':
       SAMPLE_RICH_MEDIA = {
         "BgColor": "#69C48A",
@@ -394,6 +358,42 @@ def incoming():
 
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       viber.send_messages(viber_request.sender.id, [message])
+    elif order := parse_order(message.text.upper()):
+      KEYBOARD = {
+        "Type": "keyboard",
+        "Buttons": [
+          {
+          "Columns": 3,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "CONFIRM",
+          "ReplyType": "message",
+          "Text": "CONFIRM",
+          "TextSize": "large",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 3,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "BACK",
+          "ReplyType": "message",
+          "Text": "BACK",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          }
+            ]
+        }
+      key = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
+      viber.send_messages(viber_request.sender.id, [TextMessage(text=f'Confirming your order of:'),
+                                                    TextMessage(text=order[0]),
+                                                    TextMessage(text=f'Your total will be {order[1]}'),
+                                                    TextMessage(text='Is this correct?'),
+                                                    message])
     else:
       #echo bot
       print(message.text.split('\n'))
