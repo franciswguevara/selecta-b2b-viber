@@ -80,7 +80,7 @@ def incoming():
       name = viber_request.sender.name
     except:
       pass
-    
+
     if message.text.lower() == 'order':
       viber.send_messages(viber_request.sender.id, [
         TextMessage(text='Para maka-order, i-verify muna natin ang iyong Tindahan Club account'),
@@ -116,7 +116,7 @@ def incoming():
           }
             ]
         }
-      message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
+      message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       viber.send_messages(viber_request.sender.id, [message])
     elif message.text.lower() == 'yes':
       viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/PtU6k6d.jpg',text='Makikita ang inyong outlet code sa upper-left na bahagi ng inyong invoice'),TextMessage(text='Ano ang iyong outlet code?')])
