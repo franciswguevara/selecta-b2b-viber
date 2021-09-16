@@ -2,6 +2,7 @@ from flask import Flask, request, Response
 from dotenv import load_dotenv
 import logging
 import os
+import time
 from viberbot.api.bot_configuration import BotConfiguration
 from viberbot import Api
 from viberbot.api.message_sender import MessageSender
@@ -71,12 +72,100 @@ def incoming():
 
   # this library supplies a simple way to receive a request object
   viber_request = viber.parse_request(request.get_data())
+  name = viber_request.sender.name
 
   if isinstance(viber_request, ViberMessageRequest):
     message = viber_request.message
     
     if message.text.lower() == 'order':
-      viber.send_messages(viber_request.sender.id, [TextMessage(text='What do you want to order?')])
+      viber.send_messages(viber_request.sender.id, [
+        TextMessage(text='Para maka-order, i-verify muna natin ang iyong Tindahan Club account'),
+        TextMessage(text='Ikaw ba ay direktang nakaka-order mula sa isang Unilever distributor?')
+        ])
+      
+      KEYBOARD = {
+        "Type": "keyboard",
+        "Buttons": [
+          {
+          "Columns": 3,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "YES",
+          "ReplyType": "message",
+          "Text": "YES",
+          "TextSize": "large",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 3,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "NO (SIGN-UP)",
+          "ReplyType": "message",
+          "Text": "NO (SIGN-UP)",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          }
+            ]
+        }
+      message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
+      viber.send_messages(viber_request.sender.id, [message])
+    elif message.text.lower() == 'yes':
+      viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/PtU6k6d.jpg',text='Makikita ang inyong outlet code sa upper-left na bahagi ng inyong invoice'),TextMessage(text='Ano ang iyong outlet code?')])
+    elif message.text.lower() == '1234567':
+      viber.send_messages(viber_request.sender.id, [TextMessage(text='I-enter ang mobile number na ginamit sa pag register sa Tindahan Club App or binigay sa inyong Unilever Salesman (ex.0919xxxxxxx)')])
+    elif message.text.lower() == '09778912017':
+      KEYBOARD = {
+        "Type": "keyboard",
+        "Buttons": [
+          {
+          "Columns": 2,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "AGREE",
+          "ReplyType": "message",
+          "Text": "AGREE",
+          "TextSize": "large",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 2,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "REJECT",
+          "ReplyType": "message",
+          "Text": "REJECT",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 2,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "TERMS AND CONDITIONS",
+          "ReplyType": "message",
+          "Text": "TERMS AND CONDITIONS",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          }
+            ]
+        }
+
+      message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
+      viber.send_messages(viber_request.sender.id, [TextMessage(text='Mag-login sa Tindahan Club? By clicking "AGREE" below, you are agreeing to the T&Cs of Tindahan Club.'),message])
+      viber.send_messages(viber_request.sender.id, [TextMessage(text='I-enter ang mobile number na ginamit sa pag register sa Tindahan Club App or binigay sa inyong Unilever Salesman (ex.0919xxxxxxx)')])  
+    elif message.text.lower() == 'agree':
+      viber.send_messages(viber_request.sender.id, [TextMessage(text=f'Welcome {name}!'),TextMessage(text=f'Welcome {Pumili mula sa mga product categories!}!')])
     elif message.text.lower() == 'vanilla':
       viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/MFZcVom.jpg',text='Confirming your order of 1 Tub of SELECTA IH CLSC VANILLA 1X1.5L')])
       viber.send_messages(viber_request.sender.id, [TextMessage(text='Your total is PHP 100.00 and your order is on its way!')])
@@ -147,6 +236,54 @@ def incoming():
         }
 
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=SAMPLE_KEYBOARD)
+      viber.send_messages(viber_request.sender.id, [message])
+    elif message.text.lower() == 'Start':
+      viber.send_messages(viber_request.sender.id, [TextMessage(text=f'Hi {name}! Welcome to Tindahan Club!')])
+      viber.send_messages(viber_request.sender.id, [TextMessage(text=f"Anong maitutulong namin sa'yo at sa iyong tindahan, {name}?")])
+
+      KEYBOARD = {
+        "Type": "keyboard",
+        "Buttons": [
+          {
+          "Columns": 2,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "ORDER",
+          "ReplyType": "message",
+          "Text": "ORDER",
+          "TextSize": "large",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 2,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "FAQ",
+          "ReplyType": "message",
+          "Text": "FAQ",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 2,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "SIGN UP",
+          "ReplyType": "message",
+          "Text": "SIGN UP",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          }
+            ]
+        }
+
+      message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       viber.send_messages(viber_request.sender.id, [message])
     else:
       #echo bot
