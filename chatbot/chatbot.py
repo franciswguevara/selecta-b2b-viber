@@ -241,7 +241,7 @@ def incoming():
       key = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       viber.send_messages(viber_request.sender.id, [TextMessage(text=f'Confirming your order of:'),
                                                     TextMessage(text=message[0]),
-                                                    TextMessage(text=f'Your total will be {message[1]}')
+                                                    TextMessage(text=f'Your total will be {message[1]}'),
                                                     TextMessage(text='Is this correct?'),
                                                     message])
     elif message.text.lower() == 'browse':
