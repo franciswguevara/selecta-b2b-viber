@@ -57,7 +57,8 @@ def incoming():
           "TextSize": "large",
 		      "TextHAlign": "center"
           }
-        }
+        ]
+      }
       name = viber_request.user.name
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       viber.send_messages(viber_request.user.id, [TextMessage(text=f"Hi {name}! This is the official Tindahan Club Chatbot. Please press START to begin."),message])
