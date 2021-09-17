@@ -85,7 +85,7 @@ def incoming():
         }
       name = viber_request.user.name
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
-      viber.send_messages(viber_request.user.id, [TextMessage(text=f'Hi {name}! Welcome to Tindahan Club!'),TextMessage(text=f"Anong maitutulong namin sa'yo at sa iyong tindahan, {name}?"),message])
+      viber.send_messages(viber_request.user.id, [TextMessage(text=f"Hi {name}! Welcome to Tindahan Club! Anong maitutulong namin sa'yo at sa iyong tindahan, {name}?"),message])
 
   elif isinstance(viber_request, ViberMessageRequest):
     message = viber_request.message
@@ -149,7 +149,7 @@ def incoming():
           }
             ]
         }
-      viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/PtU6k6d.jpg',text='Makikita ang inyong outlet code sa upper-left na bahagi ng inyong invoice'),TextMessage(text='Ano ang iyong outlet code?'),KEYBOARD])
+      viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/PtU6k6d.jpg',text='Makikita ang inyong outlet code sa upper-left na bahagi ng inyong invoice'),TextMessage(text='Ano ang iyong outlet code?'),message])
     elif message.text.lower() == '1234567':
       KEYBOARD = {
         "Type": "keyboard",
@@ -168,7 +168,7 @@ def incoming():
           }
             ]
         }
-      viber.send_messages(viber_request.sender.id, [TextMessage(text='I-enter ang mobile number na ginamit sa pag register sa Tindahan Club App or binigay sa inyong Unilever Salesman (ex.0919xxxxxxx)'),KEYBOARD])
+      viber.send_messages(viber_request.sender.id, [TextMessage(text='I-enter ang mobile number na ginamit sa pag register sa Tindahan Club App or binigay sa inyong Unilever Salesman (ex.0919xxxxxxx)'),message])
     elif message.text.lower() == '09778912017':
       KEYBOARD = {
         "Type": "keyboard",
