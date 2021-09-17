@@ -1,13 +1,11 @@
-from flask import Flask, request, Response
+from .code import *
 import datetime
 from dotenv import load_dotenv
+from flask import Flask, request, Response
 import logging
 import os
 from .prices import *
 import time
-from viberbot.api.bot_configuration import BotConfiguration
-from viberbot import Api
-from viberbot.api.message_sender import MessageSender
 from viberbot.api.messages import *
 from viberbot.api.viber_requests import (
   ViberConversationStartedRequest,
@@ -22,39 +20,6 @@ access_token = os.getenv("CHATBOT_TOKEN")
 
 #Start Flask
 app = Flask(__name__)
-
-class New_BotConfiguration(BotConfiguration):
-  def __init__(self, min_api_version=7,*args, **kwargs):
-    super(New_BotConfiguration, self).__init__(*args, **kwargs)
-    self._min_api_version=min_api_version
-  
-  @property
-  def min_api_version(self):
-    return self._min_api_version
-
-class New_MessageSender(MessageSender):
-  def __init__(self, *args, **kwargs):
-    super(New_MessageSender, self).__init__(*args, **kwargs)
-
-  def _prepare_payload(self, message, sender_name, sender_avatar, sender=None, receiver=None, chat_id=None):
-    payload = message.to_dict()
-    payload.update(
-      {
-        'auth_token': self._bot_configuration.auth_token,
-        'from': sender,
-        'receiver': receiver,
-        'sender': {
-          'name': sender_name,
-          'avatar': sender_avatar},
-        "chat_id": chat_id,
-        "min_api_version": self._bot_configuration.min_api_version
-      })
-    return self._remove_empty_fields(payload)
-
-class New_Api(Api):
-  def __init__(self, *args, **kwargs):
-    super(New_Api, self).__init__(*args, **kwargs)
-    self._message_sender = New_MessageSender(self._logger, self._request_sender, self._bot_configuration)
 
 viber = New_Api(New_BotConfiguration(
     name='Selecta B2B',
@@ -75,8 +40,29 @@ def incoming():
   # this library supplies a simple way to receive a request object
   viber_request = viber.parse_request(request.get_data())
   
+  if isinstance(viber_request, ViberConversationStartedRequest):
+    KEYBOARD = {
+      "Type": "keyboard",
+      "Buttons": [
+        {
+        "Columns": 3,
+        "Rows": 2,
+        "BgColor": "#e6f5ff",
+        "BgLoop": True,
+        "ActionType": "reply",
+        "ActionBody": "START",
+        "ReplyType": "message",
+        "Text": "START",
+        "TextSize": "large",
+        "TextHAlign": "center"
+        }
+          ]
+      }
 
-  if isinstance(viber_request, ViberMessageRequest):
+    message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
+    viber.send_messages(viber_request.get_user().get_id(), [
+			TextMessage(text="This is the official Tindahan Club Chatbot for Selecta. Please click START to begin."),message])
+  elif isinstance(viber_request, ViberMessageRequest):
     message = viber_request.message
     try:
       name = viber_request.sender.name
