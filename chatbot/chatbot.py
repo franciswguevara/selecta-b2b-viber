@@ -60,7 +60,7 @@ def incoming():
       }
 
     message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
-    viber.send_messages(viber_request.get_user().get_id(), [
+    viber.send_messages(viber_request.user.id, [
 			TextMessage(text="This is the official Tindahan Club Chatbot for Selecta. Please click START to begin."),message])
   elif isinstance(viber_request, ViberMessageRequest):
     message = viber_request.message
