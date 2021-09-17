@@ -125,6 +125,7 @@ def incoming():
           }
             ]
         }
+      message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/PtU6k6d.jpg',text='Makikita ang inyong outlet code sa upper-left na bahagi ng inyong invoice'),TextMessage(text='Ano ang iyong outlet code?'),message])
     elif message.text.lower() == '1234567':
       KEYBOARD = {
@@ -144,6 +145,7 @@ def incoming():
           }
             ]
         }
+      message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       viber.send_messages(viber_request.sender.id, [TextMessage(text='I-enter ang mobile number na ginamit sa pag register sa Tindahan Club App or binigay sa inyong Unilever Salesman (ex.0919xxxxxxx)'),message])
     elif message.text.lower() == '09778912017':
       KEYBOARD = {
