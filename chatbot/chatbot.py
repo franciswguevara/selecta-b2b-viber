@@ -132,9 +132,43 @@ def incoming():
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
       viber.send_messages(viber_request.sender.id, [message])
     elif message.text.lower() == 'yes':
-      viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/PtU6k6d.jpg',text='Makikita ang inyong outlet code sa upper-left na bahagi ng inyong invoice'),TextMessage(text='Ano ang iyong outlet code?')])
+      KEYBOARD = {
+        "Type": "keyboard",
+        "Buttons": [
+          {
+          "Columns": 6,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "1234567",
+          "ReplyType": "message",
+          "Text": "1234567",
+          "TextSize": "large",
+		      "TextHAlign": "center"
+          }
+            ]
+        }
+      viber.send_messages(viber_request.sender.id, [PictureMessage(media='https://i.imgur.com/PtU6k6d.jpg',text='Makikita ang inyong outlet code sa upper-left na bahagi ng inyong invoice'),TextMessage(text='Ano ang iyong outlet code?'),KEYBOARD])
     elif message.text.lower() == '1234567':
-      viber.send_messages(viber_request.sender.id, [TextMessage(text='I-enter ang mobile number na ginamit sa pag register sa Tindahan Club App or binigay sa inyong Unilever Salesman (ex.0919xxxxxxx)')])
+      KEYBOARD = {
+        "Type": "keyboard",
+        "Buttons": [
+          {
+          "Columns": 6,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "09778912017",
+          "ReplyType": "message",
+          "Text": "09778912017",
+          "TextSize": "large",
+		      "TextHAlign": "center"
+          }
+            ]
+        }
+      viber.send_messages(viber_request.sender.id, [TextMessage(text='I-enter ang mobile number na ginamit sa pag register sa Tindahan Club App or binigay sa inyong Unilever Salesman (ex.0919xxxxxxx)'),KEYBOARD])
     elif message.text.lower() == '09778912017':
       KEYBOARD = {
         "Type": "keyboard",
