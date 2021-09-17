@@ -46,46 +46,21 @@ def incoming():
         "Type": "keyboard",
         "Buttons": [
           {
-          "Columns": 2,
+          "Columns": 6,
           "Rows": 2,
           "BgColor": "#e6f5ff",
           "BgLoop": True,
           "ActionType": "reply",
-          "ActionBody": "ORDER",
+          "ActionBody": "START",
           "ReplyType": "message",
-          "Text": "ORDER",
+          "Text": "START",
           "TextSize": "large",
 		      "TextHAlign": "center"
-          },
-          {
-          "Columns": 2,
-          "Rows": 2,
-          "BgColor": "#e6f5ff",
-          "BgLoop": True,
-          "ActionType": "reply",
-          "ActionBody": "FAQ",
-          "ReplyType": "message",
-          "Text": "FAQ",
-          "TextSize": "medium",
-		      "TextHAlign": "center"
-          },
-          {
-          "Columns": 2,
-          "Rows": 2,
-          "BgColor": "#e6f5ff",
-          "BgLoop": True,
-          "ActionType": "reply",
-          "ActionBody": "SIGN UP",
-          "ReplyType": "message",
-          "Text": "SIGN UP",
-          "TextSize": "medium",
-		      "TextHAlign": "center"
           }
-            ]
         }
       name = viber_request.user.name
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
-      viber.send_messages(viber_request.user.id, [TextMessage(text=f"Hi {name}! Welcome to Tindahan Club! Anong maitutulong namin sa'yo at sa iyong tindahan, {name}?"),message])
+      viber.send_messages(viber_request.user.id, [TextMessage(text=f"Hi {name}! This is the official Tindahan Club Chatbot. Please press START to begin."),message])
 
   elif isinstance(viber_request, ViberMessageRequest):
     message = viber_request.message
