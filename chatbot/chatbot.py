@@ -41,27 +41,52 @@ def incoming():
   viber_request = viber.parse_request(request.get_data())
   
   if isinstance(viber_request, ViberConversationStartedRequest):
-    KEYBOARD = {
-      "Type": "keyboard",
-      "Buttons": [
-        {
-        "Columns": 3,
-        "Rows": 2,
-        "BgColor": "#e6f5ff",
-        "BgLoop": True,
-        "ActionType": "reply",
-        "ActionBody": "START",
-        "ReplyType": "message",
-        "Text": "START",
-        "TextSize": "large",
-        "TextHAlign": "center"
+    
+      KEYBOARD = {
+        "Type": "keyboard",
+        "Buttons": [
+          {
+          "Columns": 2,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "ORDER",
+          "ReplyType": "message",
+          "Text": "ORDER",
+          "TextSize": "large",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 2,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "FAQ",
+          "ReplyType": "message",
+          "Text": "FAQ",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 2,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "SIGN UP",
+          "ReplyType": "message",
+          "Text": "SIGN UP",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          }
+            ]
         }
-          ]
-      }
+      name = viber_request.user.name
+      message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
+      viber.send_messages(viber_request.user.id, [TextMessage(text=f'Hi {name}! Welcome to Tindahan Club!'),TextMessage(text=f"Anong maitutulong namin sa'yo at sa iyong tindahan, {name}?"),message])
 
-    message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
-    viber.send_messages(viber_request.user.id, [
-			TextMessage(text="This is the official Tindahan Club Chatbot for Selecta. Please click START to begin."),message])
   elif isinstance(viber_request, ViberMessageRequest):
     message = viber_request.message
     try:
@@ -379,6 +404,52 @@ def incoming():
                                                     key])
     elif message.text.lower() == 'confirm_2':
       viber.send_messages(viber_request.sender.id, [TextMessage(text=f"Your delivery is on it's way. Thank you for using the Tindahan Club!")])
+      viber.send_messages(viber_request.sender.id, [TextMessage(text=f"Anong maitutulong namin sa'yo at sa iyong tindahan, {name}?")])
+
+      KEYBOARD = {
+        "Type": "keyboard",
+        "Buttons": [
+          {
+          "Columns": 2,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "ORDER",
+          "ReplyType": "message",
+          "Text": "ORDER",
+          "TextSize": "large",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 2,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "FAQ",
+          "ReplyType": "message",
+          "Text": "FAQ",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          },
+          {
+          "Columns": 2,
+          "Rows": 2,
+          "BgColor": "#e6f5ff",
+          "BgLoop": True,
+          "ActionType": "reply",
+          "ActionBody": "SIGN UP",
+          "ReplyType": "message",
+          "Text": "SIGN UP",
+          "TextSize": "medium",
+		      "TextHAlign": "center"
+          }
+            ]
+        }
+      
+      message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
+      viber.send_messages(viber_request.sender.id, [message])
     elif order := parse_order(message.text.upper()):
       KEYBOARD = {
         "Type": "keyboard",
