@@ -53,7 +53,7 @@ def incoming():
           "ActionType": "reply",
           "ActionBody": "START",
           "ReplyType": "message",
-          "Text": "START",
+          "Text": "Chat with Tindahan Club",
           "TextSize": "large",
 		      "TextHAlign": "center"
           }
@@ -61,7 +61,7 @@ def incoming():
       }
       name = viber_request.user.name
       message = KeyboardMessage(tracking_data='tracking_data', keyboard=KEYBOARD)
-      viber.send_messages(viber_request.user.id, [TextMessage(text=f"Hi {name}! This is the official Tindahan Club Chatbot. Please press START to begin."),message])
+      viber.send_messages(viber_request.user.id, [message])
 
   elif isinstance(viber_request, ViberMessageRequest):
     message = viber_request.message
