@@ -46,12 +46,6 @@ class User(UserMixin, db.Model):
         unique=False,
         nullable=True
     )
-    cart = db.Column(
-        db.,
-        index=False,
-        unique=False,
-        nullable=True
-    )
 
     def __repr__(self):
         return '<User {}>'.format(self.fullname)
